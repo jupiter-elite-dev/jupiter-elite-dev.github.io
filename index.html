@@ -3,200 +3,406 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tile Tap: Triple Match Puzzle - Official Site</title>
+    <title>Jupiter Elite | Premium Game & App Studio</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #050505;
+            --surface: #111111;
+            --surface-light: #1a1a1a;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --primary: #8b5cf6;
+            --secondary: #3b82f6;
+            --accent: #ec4899;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background-color: #f8fafc;
-            color: #1e293b;
-            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.7;
         }
 
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.05), transparent 60%);
+            z-index: -1;
+            animation: rotateBg 30s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out forwards;
         }
 
         .logo {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #4f46e5;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
+            animation: gradientMove 3s linear infinite;
         }
 
         nav a {
-            color: #64748b;
+            color: var(--text-muted);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
+            font-weight: 600;
+            margin-left: 35px;
+            font-size: 0.95rem;
+            transition: color 0.3s, text-shadow 0.3s;
         }
 
         nav a:hover {
-            color: #4f46e5;
+            color: var(--text-main);
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
+        /* Hero Section */
         .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 80px 20px 40px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .game-icon {
-            width: 110px;
-            height: 110px;
-            border-radius: 22px;
-            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #6366f1, #a855f7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 16px;
-        }
-
-        .subtitle {
-            font-size: 1.15rem;
-            color: #475569;
-            margin-bottom: 32px;
-            max-width: 600px;
-        }
-
-        .btn-play {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: #4f46e5;
-            color: #ffffff;
-            padding: 14px 32px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .btn-play:hover {
-            background-color: #4338ca;
-            transform: translateY(-2px);
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-            max-width: 900px;
-            margin: 40px auto 80px;
             padding: 0 20px;
         }
 
-        .feature-card {
-            background: #ffffff;
-            padding: 28px 24px;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
+        .tagline {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            max-width: 900px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 14px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Expertise Section */
+        .section {
+            padding: 100px 8%;
+        }
+
+        .section-header {
             text-align: center;
+            margin-bottom: 60px;
         }
 
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
         }
 
-        .feature-card h3 {
-            font-size: 1.1rem;
-            color: #0f172a;
-            margin-bottom: 8px;
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .feature-card p {
-            font-size: 0.95rem;
-            color: #64748b;
+        .expertise-card {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 50px 40px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .expertise-card:hover::before { transform: scaleX(1); }
+        .expertise-card:hover {
+            transform: translateY(-10px);
+            background: var(--surface-light);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .icon-box {
+            font-size: 3rem;
+            margin-bottom: 24px;
+        }
+
+        .expertise-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .expertise-card p { color: var(--text-muted); }
+
+        /* Portfolio Section */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+        }
+
+        .game-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #2dd4bf, #3b82f6);
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            transition: transform 0.4s ease;
+        }
+
+        .game-card:hover .game-icon { transform: scale(1.08) rotate(5deg); }
+        .game-card h3 { font-size: 1.3rem; margin-bottom: 12px; }
+        .game-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover .btn-outline {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        /* Footer */
         footer {
-            border-top: 1px solid #e2e8f0;
-            padding: 30px 20px;
             text-align: center;
-            background: #ffffff;
-            color: #94a3b8;
+            padding: 40px 20px;
+            background: #000;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
-        footer a {
-            color: #64748b;
-            text-decoration: underline;
+        footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        footer a:hover { text-decoration: underline; }
+
+        /* Keyframes & Animations */
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        footer a:hover {
-            color: #4f46e5;
+        /* Scroll Reveal Utility Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            nav a { display: none; } /* Có thể thêm Hamburger menu sau */
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-animation"></div>
+
     <header>
         <a href="#" class="logo">Jupiter Elite</a>
         <nav>
+            <a href="#expertise">Expertise</a>
+            <a href="#portfolio">Our Games</a>
             <a href="privacy.html">Privacy Policy</a>
         </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="game-icon">🧩</div>
-            <h1>Tile Tap: Triple Match Puzzle</h1>
-            <p class="subtitle">Tap, Match & Relax Your Brain! A fun and addicting triple-match tile puzzle designed to sharpen your mind and relieve stress.</p>
-            
-            <a href="https://play.google.com/store/apps/details?id=com.jupiterelite.tile.match.puzzle" target="_blank" rel="noopener" class="btn-play">
-                Get it on Google Play
-            </a>
+        <!-- Hero Section -->
+        <section class="hero reveal">
+            <span class="tagline">Mobile Excellence</span>
+            <h1>Crafting Digital <br> Experiences</h1>
+            <p>We are a forward-thinking studio specializing in immersive mobile games and high-performance applications designed for a global audience.</p>
+            <a href="#portfolio" class="btn-primary">Explore Our Portfolio</a>
         </section>
 
-        <section class="features">
-            <div class="feature-card">
-                <div class="feature-icon">✨</div>
-                <h3>Simple & Fun</h3>
-                <p>Easy to pick up! Just tap to match 3 identical tiles and clear the board.</p>
+        <!-- Expertise Section -->
+        <section id="expertise" class="section">
+            <div class="section-header reveal">
+                <h2>Our Expertise</h2>
+                <p style="color: var(--text-muted);">What we do best.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🧠</div>
-                <h3>Brain Training</h3>
-                <p>Challenging levels designed to train your logic, concentration, and strategy.</p>
+            
+            <div class="grid-2">
+                <div class="expertise-card reveal">
+                    <div class="icon-box">🎮</div>
+                    <h3>Game Development</h3>
+                    <p>From casual puzzles to engaging hyper-casual experiences, we build games with captivating mechanics, stunning visuals, and optimized performance to keep players coming back.</p>
+                </div>
+                
+                <div class="expertise-card reveal" style="transition-delay: 0.2s;">
+                    <div class="icon-box">📱</div>
+                    <h3>Mobile Applications</h3>
+                    <p>We design and develop utility and lifestyle applications focused on clean UI/UX, seamless functionality, and real-world value for iOS and Android platforms.</p>
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">📶</div>
-                <h3>Play Offline</h3>
-                <p>No Wi-Fi needed. Enjoy smooth tile-matching gameplay anytime, anywhere.</p>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="section" style="background: rgba(255,255,255,0.02);">
+            <div class="section-header reveal">
+                <h2>Featured Projects</h2>
+                <p style="color: var(--text-muted);">Discover our latest releases.</p>
+            </div>
+
+            <div class="grid-3">
+                <!-- Tile Tap Game Card -->
+                <div class="game-card reveal">
+                    <div class="game-icon">🧩</div>
+                    <h3>Tile Tap: Match Puzzle</h3>
+                    <p>A beautifully designed triple-match puzzle game to relax your brain and train your strategy skills.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.jupiterelite.tile.match.puzzle" target="_blank" rel="noopener" class="btn-outline">View on Play Store</a>
+                </div>
+
+                <!-- Coming Soon Card -->
+                <div class="game-card reveal" style="transition-delay: 0.2s; opacity: 0.6;">
+                    <div class="game-icon" style="background: linear-gradient(135deg, #4b5563, #1f2937);">🚀</div>
+                    <h3>Project X</h3>
+                    <p>Our engineering team is currently brewing the next big thing in the lab. Stay tuned!</p>
+                    <span class="btn-outline" style="border-color: transparent; opacity: 0.5;">In Development</span>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Jupiter Elite. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+        <p>&copy; 2026 Jupiter Elite Studio. All rights reserved.</p>
+        <p>Read our <a href="privacy.html">Privacy Policy</a>.</p>
     </footer>
 
+    <!-- Script for Scroll Reveal Animations -->
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
+    </script>
 </body>
 </html>
